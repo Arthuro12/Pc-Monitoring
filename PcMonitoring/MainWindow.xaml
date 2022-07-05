@@ -17,14 +17,14 @@
         <Rectangle Fill="#00E74C3C" HorizontalAlignment="Left" Height="308" Stroke="#FFCFD8DD" VerticalAlignment="Top" Width="250" Margin="536,232,0,0"/>
 
         <Label Content="Systeminformationen :" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="47" Width="512" HorizontalContentAlignment="Left" FontWeight="Bold" FontSize="25"/>
-        <Label Content="OS" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Height="43" Width="387" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="25"/>
-        <Label Content="OS" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Height="40" Width="387" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="25"/>
-        <Label Content="CPU" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="418,174,0,0" VerticalAlignment="Top" Height="40" Width="387" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="25"/>
+        <Label Name="OSNameLabel" Content="OS" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="10,137,0,0" VerticalAlignment="Top" Height="43" Width="238" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="15"/>
+        <Label Name="OSArchitectureNameLabel" Content="Architecture" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Height="38" Width="238" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="15"/>
+        <Label Name="GPUNameLabel" Content="GPU" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="239,175,0,0" VerticalAlignment="Top" Height="40" Width="547" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="15"/>
+        <Label Name="processorNameLabel" Content="PROC" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="239,137,0,0" VerticalAlignment="Top" Height="40" Width="547" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="15"/>
 
         <!-- CPU-Modul -->
-        <Label Content="PROC" Foreground="#FF37474F" HorizontalAlignment="Left" Margin="418,132,0,0" VerticalAlignment="Top" Height="40" Width="387" HorizontalContentAlignment="Left" FontWeight="Normal"  FontSize="25"/>
         <Image HorizontalAlignment="Left" Height="230" Margin="18,238,0,0" VerticalAlignment="Top" Width="240" Source="/zaehler.png"/>
-        <Image HorizontalAlignment="Left" Height="67" Margin="82,301,0,0" VerticalAlignment="Top" Width="69" Source="/nadel.png" RenderTransformOrigin="0.713,0.736">
+        <Image Name="pointerImage" HorizontalAlignment="Left" Height="67" Margin="82,301,0,0" VerticalAlignment="Top" Width="69" Source="/nadel.png" RenderTransformOrigin="0.713,0.736">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -68,7 +68,7 @@
         </Image>
 
         <!-- Footer -->
-        <Rectangle Fill="#FF37474F" HorizontalAlignment="Center" Height="37" Stroke="#FFCFD8DD" VerticalAlignment="Top" Width="814" Margin="0,580,0,0"/>
-        <Label Content="Copyright @ Arthur Foadjo Dje" HorizontalAlignment="Center" VerticalAlignment="Top" Width="814" Height="37" FontSize="20" FontWeight="Normal" Foreground="White" HorizontalContentAlignment="Center" Margin="0,580,0,0"/>
+        <Rectangle Fill="#FF37474F" HorizontalAlignment="Center" Height="43" Stroke="#FFCFD8DD" VerticalAlignment="Top" Width="813" Margin="0,571,0,0"/>
+        <Label Content="Copyright @ Arthur Foadjo Dje" HorizontalAlignment="Center" VerticalAlignment="Top" Width="813" Height="43" FontSize="20" FontWeight="Normal" Foreground="White" HorizontalContentAlignment="Center" Margin="0,571,0,0"/>
     </Grid>
 </Window>

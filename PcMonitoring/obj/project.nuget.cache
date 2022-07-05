@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "RiYbpWrLlc2UrWyhVCbXrsOx8EW4Zavm4dRDmKZbB+EuSV+zvlm4uESEH55/1oT1t+0G4J3rDdcI92LxDhqXWQ==",
+  "dgSpecHash": "/ldWU14qFq7ZcD+5vfkDKoIXUQA/4CMB9m+Dwd+zBJwgd+bPrfZ/H6W2/OfGcgklNWTYiOxyBsQ42B4vCU7WOg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ThinkPad\\source\\repos\\Pc-Monitoring\\PcMonitoring\\PcMonitoring.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\system.management\\6.0.0\\system.management.6.0.0.nupkg.sha512",
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\ThinkPad\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
