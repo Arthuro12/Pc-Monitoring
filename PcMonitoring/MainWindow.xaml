@@ -46,7 +46,7 @@
         <Label x:Name="usedRAM" Content="Benutzt : 10,00 GB" HorizontalAlignment="Left" Margin="280,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="234" Height="30" FontSize="15"/>
         <Label x:Name="freeRAM" Content="Frei : 5,90 GB" HorizontalAlignment="Left" Margin="279,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="234" Height="30" FontSize="15"/>
         <Label Content="TEMPERATUR" HorizontalAlignment="Left" Margin="272,435,0,0" VerticalAlignment="Top" Height="40" Width="250" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Center"/>
-        <Label x:Name="tempLabel" Content="80°C" HorizontalAlignment="Left" Margin="271,480,0,0" VerticalAlignment="Top" Height="46" Width="250" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Center"/>
+        <Label x:Name="tempLabel" Content="0°C" HorizontalAlignment="Left" Margin="271,480,0,0" VerticalAlignment="Top" Height="46" Width="250" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Center"/>
 
         <!-- Festplatten -->
         <Label  Content=" Festplatten" HorizontalAlignment="Left" Margin="536,238,0,0" VerticalAlignment="Top" Height="40" Width="250" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Left"/>

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Management;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,11 +40,45 @@ namespace PcMonitoring
             // Get PC´s infos
             GetAllSystemInfos();
 
+            // Get Disk´s infos
+            GetDrivesInfos();
+
             // Timer for real time updates
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(0.75);
             timer.Tick += Timer_Tick;
             timer.Start();
+        }
+
+        public void GetDrivesInfos()
+        {
+            DriveInfo[] allDrives = DriveInfo.GetDrives();
+            List<Disk> disks = new List<Disk>();
+
+            foreach(DriveInfo info in allDrives)
+            {
+                if (info.IsReady == true)
+                {
+                    Console.WriteLine("Festplatte " + info.Name + " ist bereit !");                   
+                }
+                disks.Add(new Disk(info.Name, info.DriveFormat, FormatBytes(info.TotalSize), FormatBytes(info.AvailableFreeSpace)));
+            }
+
+            disksListLb.ItemsSource = disks;
+
+        } 
+
+        private static string FormatBytes(long bytes)
+        {
+            string[] suffixe = { "B", "KB", "MB", "GB", "TB" };
+            int i;
+            double dblSByte = bytes;
+            for (i = 0; i < suffixe.Length && bytes >= 1024; i++, bytes /= 1024)
+            {
+                dblSByte = bytes / 1024.0;
+            }
+
+            return String.Format("{0:0.##} {1}", dblSByte, suffixe[i]);
         }
 
         /// <summary>
@@ -55,6 +92,66 @@ namespace PcMonitoring
             // Update RAM´s infos
             RefreshRamInfos();
 
+            // ZUpdate network´s infos 
+            RefreshNetworkInfos();
+
+            // Update temperatur´s infos
+            RefreshTemperatureInfos();
+        }
+
+        public void RefreshTemperatureInfos()
+        {
+            Double temperature = 0;
+            System.Management.ManagementObjectSearcher mos = new System.Management.ManagementObjectSearcher("root\\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+
+            foreach (System.Management.ManagementObject mo in mos.Get())
+            {
+                temperature = Convert.ToDouble(Convert.ToDouble(mo.GetPropertyValue("CurrentTemperature").ToString()) - 2732) / 10;
+            }
+            tempLabel.Content = temperature + "°C"; 
+            /*Double temperature = 0;
+            String instanceName = "";
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\CIMV2", "SELECT * FROM Win32_TemperatureProbe");
+
+            try
+            {
+                
+                foreach (ManagementObject mo in mos.Get())
+                {
+                    if(Convert.ToDouble(mo["CurrentTemperature"].ToString()) > 0)
+                    {
+                        temperature = Convert.ToDouble(mo["CurrentTemperature"].ToString());
+                        // °F to °C
+                        temperature = (temperature - 2732) / 10.0;
+                        instanceName = mo["InstanceName"].ToString();
+                    }                  
+                   
+                }               
+            }
+            catch (ManagementException me)
+            {
+                MessageBox.Show(me.Message);
+            }
+            tempLabel.Content = temperature + "°C";*/
+        }
+
+        public void RefreshNetworkInfos()
+        {
+            if(!NetworkInterface.GetIsNetworkAvailable())
+            {
+                return;
+            }
+
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach(NetworkInterface ni in interfaces)
+            {
+                if(ni.GetIPv4Statistics().BytesSent > 0)
+                   sentDataLabel.Content = ni.GetIPv4Statistics().BytesSent / 1000 + " KB";
+                if(ni.GetIPv4Statistics().BytesReceived > 0)
+                   receivedDataLabel.Content = ni.GetIPv4Statistics().BytesReceived / 1000 + " KB";
+            }
         }
 
         public void RefreshRamInfos()
