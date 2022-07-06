@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -50,6 +51,22 @@ namespace PcMonitoring
         {
             // Update of CPU´s infos
             CPULabel.Content = RefreshCPUInfos();
+
+            // Update RAM´s infos
+            RefreshRamInfos();
+
+        }
+
+        public void RefreshRamInfos()
+        {
+            totalRAM.Content = "Gesamt : " + FormatSize(GetTotalPhys());
+            usedRAM.Content = "Update : " + FormatSize(GetUsedPhys());
+            freeRAM.Content = "Verfügbar : " + FormatSize(GetAvailPhys());
+
+            string[] maxValue = FormatSize(GetTotalPhys()).Split(' ');
+            barRAM.Maximum = float.Parse(maxValue[0]);
+            string[] memoryValue = FormatSize(GetUsedPhys()).Split(' ');
+            barRAM.Value = float.Parse(memoryValue[0]);
         }
 
         public string RefreshCPUInfos()
@@ -72,6 +89,70 @@ namespace PcMonitoring
 
             return roundVal +" %";
         }
+
+        /* Working with the memory (RAM) */
+        #region specific functions to the RAM
+        [DllImport("kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GlobalMemoryStatusEx(ref MEMORY_INFO min);
+        
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MEMORY_INFO
+        {
+            public uint dwLength;
+            public uint dwMemoryLoad;
+            public ulong ullTotalPhys;
+            public ulong ullAvailPhys;
+            public ulong ullTotalPageFiles;
+            public ulong ullAvailPageFile;
+            public ulong ullTotalVirtual;
+            public ulong ullAvailVirtual;
+            public ulong ullAvailExtendedVirtual;
+        }
+
+        static string FormatSize(double size)
+        {
+            double d = (double)size;
+            int i = 0;
+            while((d > 1024) && (i < 5))
+            {
+                d /= 1024;
+                i++;
+            }
+            string[] unit = { "B", "KB", "MB", "GB", "TB" };
+            return (string.Format("{0} {1}", Math.Round(d, 2), unit[i])); 
+        }
+
+        public static MEMORY_INFO GetMemoryStatus()
+        {
+            MEMORY_INFO mi = new MEMORY_INFO();
+            mi.dwLength = (uint)Marshal.SizeOf(mi);
+            GlobalMemoryStatusEx(ref mi);
+            return mi;
+        }
+
+        // Get free physic memory
+        public static ulong GetAvailPhys()
+        {
+            MEMORY_INFO mi = GetMemoryStatus();
+            return mi.ullAvailPhys;
+        }
+
+        // Get used memory
+        public static ulong GetUsedPhys()
+        {
+            MEMORY_INFO mi = GetMemoryStatus();
+            return (mi.ullTotalPhys - mi.ullAvailPhys);
+        }
+
+        //Get total physic memory
+        public static ulong GetTotalPhys()
+        {
+            MEMORY_INFO mi = GetMemoryStatus();
+            return mi.ullTotalPhys;
+        }
+
+        #endregion
 
         public void GetAllSystemInfos()
         {

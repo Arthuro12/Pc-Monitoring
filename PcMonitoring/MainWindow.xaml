@@ -29,7 +29,7 @@
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="180"/>
+                    <RotateTransform Angle="270.639"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
@@ -41,7 +41,7 @@
         <!-- RAM-Modul & Temp -->
         <Label Content="RAM" HorizontalAlignment="Left" Margin="272,238,0,0" VerticalAlignment="Top" Height="40" Width="250" FontWeight="Bold" FontSize="25" HorizontalContentAlignment="Left"/>
         <Label Content="Speicherverwendung :" HorizontalAlignment="Left" Margin="272,278,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="250" Height="30" FontSize="15"/>
-        <ProgressBar HorizontalAlignment="Left" Height="26" Margin="279,320,0,0" VerticalAlignment="Top" Width="234" Background="#FFCFD8DD" BorderBrush="#FF78909C" Foreground="#FF37474F" Value="50"/>
+        <ProgressBar x:Name="barRAM" HorizontalAlignment="Left" Height="26" Margin="279,320,0,0" VerticalAlignment="Top" Width="234" Background="#FFCFD8DD" BorderBrush="#FF78909C" Foreground="#FF37474F" Value="50"/>
         <Label x:Name="totalRAM" Content="Gesamt : 15,90 GB" HorizontalAlignment="Left" Margin="279,345,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="234" Height="30" FontSize="15"/>
         <Label x:Name="usedRAM" Content="Benutzt : 10,00 GB" HorizontalAlignment="Left" Margin="280,375,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="234" Height="30" FontSize="15"/>
         <Label x:Name="freeRAM" Content="Frei : 5,90 GB" HorizontalAlignment="Left" Margin="279,405,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.259,0.052" Width="234" Height="30" FontSize="15"/>
